@@ -4,10 +4,10 @@ import 'package:shop_project/models/cart.dart';
 import 'package:shop_project/models/product.dart';
 import 'package:shop_project/utils/app_routes.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductGridItem extends StatelessWidget {
   
   
-  const ProductItem({super.key});
+  const ProductGridItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,17 @@ class ProductItem extends StatelessWidget {
           ),
           trailing: IconButton(
             onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Produto adicionado com Sucesso!'), 
+                  duration: Duration(seconds: 2),
+                  action: SnackBarAction(
+                    label: 'DESFAZER', 
+                    onPressed: () => cart.removeSingleItem(product.id),
+                  ),
+                )
+              );
               cart.addItem(product);
             }, 
             icon: Icon(Icons.shopping_cart),
